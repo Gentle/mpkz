@@ -331,6 +331,7 @@ dependencies = [
 [[package]]
 name = "pythonize"
 version = "0.20.0"
+source = "git+https://github.com/Gentle/pythonize.git?branch=feat-export_more#81aea334f6bf64245bec3bacb01092ecfab9de7a"
 dependencies = [
  "pyo3",
  "serde",

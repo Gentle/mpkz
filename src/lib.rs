@@ -1,16 +1,12 @@
 use std::io::Cursor;
 
-use pyo3::{
-    exceptions::PyValueError,
-    prelude::*,
-    types::{PyBytes, PyDict, PyTuple},
-};
+use pyo3::{exceptions::PyValueError, prelude::*, types::PyBytes};
 use pyo3_file::PyFileLikeObject;
 use pythonize::{Depythonizer, Pythonizer};
 use rmp_serde::{Deserializer, Serializer};
 use serde_transcode::transcode;
 
-/// note to ipython: please use the pyi file, thanks
+/// see mpkz.pyi
 #[pyfunction]
 fn load<'py>(py: Python<'py>, fp: Py<PyAny>) -> PyResult<Py<PyAny>> {
     let file = PyFileLikeObject::with_requirements(fp, true, false, false, false)?;
@@ -21,7 +17,7 @@ fn load<'py>(py: Python<'py>, fp: Py<PyAny>) -> PyResult<Py<PyAny>> {
     Ok(x)
 }
 
-/// note to ipython: please use the pyi file, thanks
+/// see mpkz.pyi
 #[pyfunction]
 fn loads<'py>(py: Python<'py>, bytes: &'py PyBytes) -> PyResult<Py<PyAny>> {
     let decoder = zstd::Decoder::new(bytes.as_bytes())?;
@@ -31,7 +27,7 @@ fn loads<'py>(py: Python<'py>, bytes: &'py PyBytes) -> PyResult<Py<PyAny>> {
     Ok(x)
 }
 
-/// note to ipython: please use the pyi file, thanks
+/// see mpkz.pyi
 #[pyfunction]
 #[pyo3(signature = (obj, fp, *, level=8))]
 fn dump(obj: &PyAny, fp: Py<PyAny>, level: i32) -> PyResult<()> {
@@ -44,7 +40,7 @@ fn dump(obj: &PyAny, fp: Py<PyAny>, level: i32) -> PyResult<()> {
     Ok(())
 }
 
-/// note to ipython: please use the pyi file, thanks
+/// see mpkz.pyi
 #[pyfunction]
 #[pyo3(signature = (obj, *, level=8))]
 fn dumps<'py>(py: Python<'py>, obj: &'py PyAny, level: Option<i32>) -> PyResult<&'py PyBytes> {
@@ -58,18 +54,12 @@ fn dumps<'py>(py: Python<'py>, obj: &'py PyAny, level: Option<i32>) -> PyResult<
     Ok(PyBytes::new(py, &bytes))
 }
 
-/// note to ipython: please use the pyi file, thanks
+/// see mpkz.pyi
 #[pymodule]
-fn mpkz(py: Python, m: &PyModule) -> PyResult<()> {
+fn mpkz(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(load, m)?)?;
     m.add_function(wrap_pyfunction!(loads, m)?)?;
     m.add_function(wrap_pyfunction!(dump, m)?)?;
     m.add_function(wrap_pyfunction!(dumps, m)?)?;
-    let child = PyModule::new(py, "mpkz.jsonz")?;
-    jsonz(py, child)?;
-    m.add("jsonz", child)?;
-    py.import("sys")?
-        .getattr("modules")?
-        .set_item("supermodule.submodule", child)?;
     Ok(())
 }
