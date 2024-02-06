@@ -1,0 +1,23 @@
+[package]
+name = "mpkz"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "mpkz"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.20.2"
+pyo3-file = { git = "https://github.com/omerbenamram/pyo3-file.git", version = "0.7.0" }
+#pythonize = { git = "https://github.com/davidhewitt/pythonize.git", version = "0.20.0" }
+#pythonize = { path = "/Users/gentle/work/rust/pythonize", version = "0.20.0" }
+rmp-serde = "1.1.2"
+rmpv = { version = "1.0.1", features = ["with-serde"] }
+serde-transcode = "1.1.1"
+serde_json = "1.0.113"
+zstd = "0.13.0"
+
+[dependencies.pythonize]
+path = "/Users/gentle/work/rust/pythonize"
