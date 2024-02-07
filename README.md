@@ -16,3 +16,14 @@ and then compress those bytes to zstd, and then write those compressed bytes to 
 
 This implementation directly serializes the python objects into a streaming zstd compressor,
 avoiding copying data more than once
+
+## Interface
+
+the module has 4 functions `load`, `loads`, `dump` and `dumps` which behave mostly like their json counterparts,
+with the difference that `loads` and `dumps` operate on bytes objects instead of strings
+
+the dump functions have an optional kwarg `level` which by default is 8.
+The allowed range goes from 0 (no compression) to 22 (very high memory and cpu usage).
+8 had the best compression / time taken ratio, anything above takes exponentially longer
+
+for types and docstrings, see `mpkz.pyi`
