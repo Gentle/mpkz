@@ -54,7 +54,11 @@ def openb(data: bytes):
 
 def create(filename, *, level=8) -> MpkzWriter:
     """
-    create a new multi-record mpkz file. Appending is not supported
+    create a new multi-record mpkz file
+
+    because of the way zstd compression works,
+    you can only create new files.
+    Opening for appending is not possible
 
     Example:
     ```
