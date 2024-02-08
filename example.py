@@ -8,9 +8,9 @@ def basic_bench(input_file, iterations):
     with open(input_file) as f:
         json_string = f.read()
     data = json.loads(json_string)
-    mpz_bytes = mpkz.dumps(data)
+    mpz_bytes = mpkz.dumpb(data)
 
-    duration = timeit(lambda: mpkz.loads(mpz_bytes), number=iterations)
+    duration = timeit(lambda: mpkz.loadb(mpz_bytes), number=iterations)
     print(f"loading mpkz, {iterations} iterations, average duration {duration / iterations}")
 
     duration = timeit(lambda: json.loads(json_string), number=iterations)
