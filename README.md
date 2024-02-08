@@ -65,7 +65,6 @@ writer.append("world")
 
 # and this is how you would iterate over the contents
 # of a file without loading the whole file into memory
-import mkpz
 for row in mpkz.open("export.mpz"):
     print(row)
 ```
