@@ -13,8 +13,6 @@ use pythonize::{Depythonizer, Pythonizer};
 use rmp_serde::{decode::ReadSlice, Deserializer, Serializer};
 use serde_transcode::transcode;
 
-pub mod streaming;
-
 struct MpkzIterator<'py, R> {
     py: Python<'py>,
     de: Deserializer<R>,
