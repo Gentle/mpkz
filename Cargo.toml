@@ -10,7 +10,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = "0.20.2"
-pyo3-file = { git = "https://github.com/omerbenamram/pyo3-file.git", version = "0.7.0" }
+pyo3-file = { git = "https://github.com/Gentle/pyo3-file.git", branch = "fix-windowsbuild" }
 rmp-serde = "1.1.2"
 rmpv = { version = "1.0.1", features = ["with-serde"] }
 serde-transcode = "1.1.1"
